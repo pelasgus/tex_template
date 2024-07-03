@@ -1,0 +1,3 @@
+#+TITLE: TEX TEMPLATE
+#+SUBTITLE: A highly opinionated latex template
+#+AUTHOR: D.A.Pelasgus
