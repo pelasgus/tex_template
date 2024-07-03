@@ -3,6 +3,8 @@
 #+AUTHOR: D.A.Pelasgus
 
 - This is a highly opinionated Latex template.
+- The temaplate makes use of lualatex.
+- A lua script extracts the title from the latex project; its used as the final pdfs name.
 - To use this template either clone the repository or click on the /use this template button/.
 - Navigate to /setup/variables.tex/ for credetials' declaration.
 - On *Git Push*, a PDF artefact shall be generated, available under the actions tab.
