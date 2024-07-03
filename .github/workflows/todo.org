@@ -1,5 +1,3 @@
 https://github.com/marketplace/actions/github-action-for-latex
-Update script so that it deletes older PDFS
 Move PDFs to output directory
-Add import to main.tex
 Unbundle zip; skip this step
