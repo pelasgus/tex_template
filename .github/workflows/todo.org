@@ -1,3 +1,0 @@
-https://github.com/marketplace/actions/github-action-for-latex
-Move PDFs to output directory
-Unbundle zip; skip this step
