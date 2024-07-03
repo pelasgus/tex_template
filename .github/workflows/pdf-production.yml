@@ -18,11 +18,19 @@ jobs:
         with:
           root_file: main.tex
           latexmk_use_xelatex: true
+          
+      - name: Tag the release
+        id: tag_release
+        run: |
+          TAG=v$(date +'%Y%m%d%H%M%S')
+          git tag $TAG
+          echo "::set-output name=tag::$TAG"
       
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.tag_release.outputs.tag }}
           files: main.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
