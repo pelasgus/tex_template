@@ -1,5 +1,8 @@
 name: Compile LaTeX document
-on: [push]
+on: 
+  push:
+    branches:
+      - main  
 jobs:
   build_latex:
     runs-on: ubuntu-latest
@@ -11,7 +14,8 @@ jobs:
         run: |
           sudo apt-get install -y lua5.3
           lua logic/logic.lua main.tex > pdf_name.txt
-          echo "PDF_NAME=$(cat pdf_name.txt)" >> $GITHUB_ENV
+          TAG_NAME=$(cat pdf_name.txt | tr -d '\n')
+          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
 
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
@@ -19,19 +23,29 @@ jobs:
           root_file: main.tex
           latexmk_use_xelatex: true
           
+      - name: Rename PDF file
+        run: |
+          PDF_NAME=$(cat pdf_name.txt | tr -d '\n')
+          mv main.pdf "${PDF_NAME}.pdf"
+        env:
+          PDF_NAME: ${{ env.TAG_NAME }}
+
       - name: Tag the release
         id: tag_release
         run: |
-          TAG=v$(date +'%Y%m%d%H%M%S')
+          TAG=${TAG_NAME}
           git tag $TAG
           echo "::set-output name=tag::$TAG"
-      
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          TAG_NAME: ${{ env.TAG_NAME }}
+
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.tag_release.outputs.tag }}
-          files: main.pdf
+          files: ${{ env.PDF_NAME }}.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
@@ -39,4 +53,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.PDF_NAME }}
-          path: main.pdf
+          path: "${{ env.PDF_NAME }}.pdf"
