@@ -1,0 +1,47 @@
+% coverpage.tex
+\documentclass{article}
+% PACKAGE DECLARATION
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{calc}
+\usepackage{anyfontsize}
+% Variable Declaration
+\input{variables.tex}
+
+\begin{document}
+\pagestyle{empty}
+
+% Background colour
+\begin{tikzpicture}[remember picture,overlay]
+\fill[RoyalPurple] (current page.south west) rectangle (current page.north east);
+
+% Background Circle
+\begin{scope}
+\foreach \i in {2.5,...,22}
+{\node[rounded corners,RoyalPurple!90,draw,circle, minimum size=\i cm,ultra thick] at ($(current page.west)+(2.5,-5)$) {} ;}
+\end{scope}
+
+\foreach \i in {0.5,...,22}
+{\node[rounded corners,RoyalPurple!90,draw, circle, minimum size=\i cm,ultra thick] at ($(current page.north west)+(2.5,0)$) {} ;}
+
+\foreach \i in {0.5,...,22}
+{\node[rounded corners,RoyalPurple!98,draw,circle, minimum size=\i cm,ultra thick] at ($(current page.north east)+(0,-9.5)$) {} ;}
+
+\foreach \i in {21,...,6}
+{\node[RoyalPurple!95,rounded corners,draw,circle, minimum size=\i cm,ultra thick] at ($(current page.south east)+(-0.2,-0.45)$) {} ;}
+
+% Title
+\node[left,RoyalPurple!5,minimum width=0.625*\paperwidth,minimum height=3cm, rounded corners] at ($(current page.north east)+(0,-9.5)$){{\fontsize{25}{30} \selectfont \bfseries \titletext}};
+
+% Subtitle 
+\node[left,RoyalPurple!10,minimum width=0.625*\paperwidth,minimum height=2cm, rounded corners] at ($(current page.north east)+(0,-11)$){{\huge \textit{\subtitletext}}};
+
+% Author Name
+\node[left,RoyalPurple!5,minimum width=0.625*\paperwidth,minimum height=2cm, rounded corners] at ($(current page.north east)+(0,-13)$){{\Large \textsc{\authorname}}};
+
+% Logo
+\node[rounded corners,fill=RoyalPurple!95,text =RoyalPurple!5,circle, minimum size=2.5 cm,inner sep=0,ultra thick] at ($(current page.west)+(2.5,-5)$) {\LARGE \bfseries \Huge $\Pi$};
+
+\end{tikzpicture}
+\end{document}
