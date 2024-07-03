@@ -3,6 +3,6 @@
 #+AUTHOR: D.A.Pelasgus
 
 - This is a highly opinionated Latex template.
-- To use this template either clone the repository or click on the `use this template button`.
-- Navigate to `setup/variables.tex` for credetials' declaration.
-- On Git Push, a PDF will be generated.
+- To use this template either clone the repository or click on the /use this template button/.
+- Navigate to /setup/variables.tex/ for credetials' declaration.
+- On *Git Push*, a PDF artefact shall be generated, available under the actions tab.
